@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE cvs SYSTEM "cv.gen.dtd">
 <cvs>
 	<meilleurCV idcv="_234"/>
@@ -8,7 +8,7 @@
 			<nom>DESORBAIX</nom>
 			<pnom>Alexandre</pnom>
 			<pnom>Dominique</pnom>
-			<pnom>joÃ«l</pnom>
+			<pnom>joël</pnom>
 			<datenaiss>1984-08-03</datenaiss>
 			<permis ownVehicule="false">A</permis>
 			<langues>
@@ -18,13 +18,14 @@
 			<!--<tel>06.64.27.63.60</tel>-->
 			<mail>desorbaix@free.fr</mail>
 		</ident>
+		<pretentionSalariale>10000&euro;</pretentionSalariale>
 		<formations>
 			<formation>
 				<deb>2004</deb>
 				<fin>2008</fin>
-				<centre>Fac de versailles</centre>
+				<centre>Fac &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de versailles</centre>
 				<diplomes>
-					<diplome obtenu="true">
+					<diplome obtenu="true" noteS20="25">
 						<intitule>DUT GEII</intitule>
 					</diplome>
 					<diplome obtenu="false">
@@ -37,7 +38,7 @@
 				<centre>Orsys</centre>
 				<diplomes>
 					<diplome>
-						<intitule>Programation XML + dÃ©rivÃ©s</intitule>
+						<intitule>Programation XML &amp; dérivés</intitule>
 					</diplome>
 				</diplomes>
 			</formation>
@@ -59,7 +60,7 @@
 			<nom>DESORBAIX</nom>
 			<pnom>Alexandre</pnom>
 			<pnom>Dominique</pnom>
-			<pnom>joÃ«l</pnom>
+			<pnom>joël</pnom>
 			<datenaiss>1984-08-03</datenaiss>
 			<permis ownVehicule="false">A</permis>
 			<langues>
@@ -88,7 +89,7 @@
 				<centre>Orsys</centre>
 				<diplomes>
 					<diplome>
-						<intitule>Programation XML + dÃ©rivÃ©s</intitule>
+						<intitule>Programation XML + dérivés</intitule>
 					</diplome>
 				</diplomes>
 			</formation>
@@ -110,7 +111,7 @@
 			<nom>DESORBAIX</nom>
 			<pnom>Alexandre</pnom>
 			<pnom>Dominique</pnom>
-			<pnom>joÃ«l</pnom>
+			<pnom>joël</pnom>
 			<datenaiss>1984-08-03</datenaiss>
 			<permis ownVehicule="false">A</permis>
 			<langues>
@@ -139,7 +140,7 @@
 				<centre>Orsys</centre>
 				<diplomes>
 					<diplome>
-						<intitule>Programation XML + dÃ©rivÃ©s</intitule>
+						<intitule>Programation XML + dérivés</intitule>
 					</diplome>
 				</diplomes>
 			</formation>
