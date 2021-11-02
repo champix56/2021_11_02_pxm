@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cvs SYSTEM "cv.gen.dtd">
 <cvs>
+	<meilleurCV idcv="_234"/>
+	<cvSelectiones idcvs="_234 _236"/>
 	<cv idcv="_234">
 		<ident>
 			<nom>DESORBAIX</nom>

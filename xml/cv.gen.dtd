@@ -33,4 +33,14 @@
 <!ELEMENT experience (deb, fin?, intitule)>
 <!ELEMENT formations (formation*)>
 <!ELEMENT experiences (experience*)>
-<!ELEMENT cvs (cv+)>
+<!--
+	ajout pour demo ref d'id
+-->
+<!ELEMENT cvs (meilleurCV,cvSelectiones,cv+)>
+<!ELEMENT meilleurCV EMPTY>
+<!ATTLIST meilleurCV
+	idcv IDREF #REQUIRED>
+<!ELEMENT cvSelectiones EMPTY>
+<!ATTLIST cvSelectiones
+	idcvs IDREFS #REQUIRED>
+
