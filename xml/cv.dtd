@@ -1,0 +1,43 @@
+<!ELEMENT cv (ident, formations, experiences)>
+<!ATTLIST cv
+	idcv CDATA #REQUIRED
+>
+<!ELEMENT ident (nom, pnom, pnom?, pnom?, datenaiss, permis, langues, tel, mail)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT pnom (#PCDATA)>
+<!ELEMENT datenaiss (#PCDATA)>
+<!ELEMENT permis (#PCDATA)>
+<!ATTLIST permis
+	ownVehicule CDATA #REQUIRED
+>
+<!ELEMENT langues (langue+)>
+<!ELEMENT langue EMPTY>
+<!ATTLIST langue
+	matern CDATA #REQUIRED
+	langName CDATA #REQUIRED
+>
+<!ELEMENT tel (#PCDATA)>
+<!ELEMENT mail (#PCDATA)>
+<!--
+	section FORMATIONS
+-->
+<!ELEMENT formations (formation*)>
+<!ELEMENT formation (deb, fin?, centre, diplomes)>
+<!ELEMENT diplomes (diplome*)>
+<!ELEMENT diplome (intitule)>
+<!--attribut facultatif-->
+<!ATTLIST diplome
+	obtenu CDATA #IMPLIED
+>
+<!ELEMENT centre (#PCDATA)>
+<!ELEMENT intitule (#PCDATA)>
+<!ELEMENT deb (#PCDATA)>
+<!ELEMENT fin (#PCDATA)>
+<!--
+	fin section FORMATIONS
+-->
+<!--
+	section EXPERIENCES
+-->
+<!ELEMENT experiences (experience*)>
+<!ELEMENT experience (deb,fin?,intitule)>
