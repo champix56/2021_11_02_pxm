@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE cv SYSTEM "cv.dtd">
+<!DOCTYPE cv SYSTEM "cv.gen.dtd">
 <cv idcv="234">
 	<ident>
 		<nom>DESORBAIX</nom>
