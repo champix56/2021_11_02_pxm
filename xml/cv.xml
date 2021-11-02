@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cv idcv="234">
+	<ident>
+		<nom>DESORBAIX</nom>
+		<pnom>Alexandre</pnom>
+		<pnom>Dominique</pnom>
+		<pnom>joël</pnom>
+		<datenaiss>1984-08-03</datenaiss>
+		<permis ownVehicule="true">A</permis>
+		<langues>
+			<langue matern="true" langName="FR"/>
+			<langue matern="false" langName="EN"/>
+		</langues>
+		<tel>06.64.27.63.60</tel>
+		<mail>desorbaix@free.fr</mail>
+	</ident>
+	<formations>
+		<formation>
+			<deb>2004</deb>
+			<fin>2008</fin>
+			<centre>Fac de versailles</centre>
+			<diplomes>
+				<diplome obtenu="true">
+					<intitule>DUT GEII</intitule>
+				</diplome>
+				<diplome obtenu="false">
+					<intitule>Doctorat informatique</intitule>
+				</diplome>
+			</diplomes>
+		</formation>
+		<formation>
+			<deb>2021</deb>
+			<centre>Orsys</centre>
+			<diplomes>
+				<diplome>
+					<intitule>Programation XML + dérivés</intitule>
+				</diplome>
+			</diplomes>
+		</formation>
+	</formations>
+	<experiences>
+		<experience>
+			<deb>2004</deb>
+			<fin>2008</fin>
+			<intitule>SFC societe francaise de ceramique</intitule>
+		</experience>
+		<experience>
+			<deb>2008</deb>
+			<intitule>Formateur Orsys</intitule>
+		</experience>
+	</experiences>
+</cv>
