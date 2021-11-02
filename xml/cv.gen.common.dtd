@@ -1,0 +1,32 @@
+<!--
+	param entity pour un type enumere
+-->
+<!ENTITY % booleanType "(true|false)">
+<!ENTITY % etatCivil "nom, pnom, pnom?, pnom?">
+
+<!--
+	section IDENT
+-->
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT tel (#PCDATA)>
+<!ELEMENT mail (#PCDATA)>
+<!ELEMENT pnom (#PCDATA)>
+<!ELEMENT ident (%etatCivil;, datenaiss, permis, langues, (tel | mail)?)>
+
+<!ELEMENT langue EMPTY>
+<!ATTLIST langue
+	matern %booleanType; #REQUIRED
+	langName CDATA #REQUIRED
+>
+<!ELEMENT permis (#PCDATA)>
+<!ATTLIST permis
+	ownVehicule %booleanType; #REQUIRED
+>
+<!ELEMENT langues (langue+)>
+<!ELEMENT datenaiss (#PCDATA)>
+<!--
+	ENTITIES
+-->
+<!ENTITY euro "&#x20ac;"><!--ou #8364 en base 10-->
+<!ENTITY nbsp "&#160;"><!--ou #xA0 en base 16-->
+<!ENTITY signature "DESORBAIX Alexanrde">
