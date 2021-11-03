@@ -48,6 +48,14 @@
 								<xs:complexType>
 									<xs:sequence>
 										<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
+										<xs:element name="centre">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="3"/>
+													<xs:maxLength value="48"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
