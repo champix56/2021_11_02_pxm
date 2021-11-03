@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="ST_anneeBornee1930">
+		<xs:annotation>
+			<xs:documentation>type simple reutilisable pour la gestion de date 1930->+infini</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear">
+			<xs:minInclusive value="1930"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:element name="cvs">
 		<xs:annotation>
 			<xs:documentation>Noeud principal pour les cvs</xs:documentation>
@@ -36,15 +44,15 @@
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="deb" >
-														<xs:simpleType>
-															<xs:restriction base="xs:gYear">
-																<xs:minInclusive value="1930"/>
-															</xs:restriction>
-														</xs:simpleType>
+													<xs:element name="deb">
+														<!--
+
+
+
+-->
 													</xs:element>
-													<xs:element name="fin" type="xs:gYear" minOccurs="0" />
-													<xs:element name="intitule" type="xs:string" />
+													<xs:element name="fin" type="xs:gYear" minOccurs="0"/>
+													<xs:element name="intitule" type="xs:string"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
