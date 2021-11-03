@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="cvs">
+		<xs:annotation>
+			<xs:documentation>Noeud principal pour les cvs</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="meilleurCV">
+					<xs:complexType>
+						<xs:attribute name="idcv" type="xs:IDREF"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="cvSelectiones">
+					<xs:complexType>
+						<xs:attribute name="idcvs" type="xs:IDREFS"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="cv" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>element qualifiant un CV</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ident"/>
+							<xs:element name="pretentionSalariale" type="xs:int" minOccurs="0"/>
+							<xs:element name="formations"/>
+							<xs:element name="experiences">
+								<xs:complexType>
+									<xs:sequence>
+										<!--limitation du nb d'occurence a 10 max-->
+										<xs:element name="experience" maxOccurs="10">
+											<xs:annotation>
+												<xs:documentation>Element experience limite 10 occurence</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="deb" >
+														<xs:simpleType>
+															<xs:restriction base="xs:gYear">
+																<xs:minInclusive value="1930"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="fin" type="xs:gYear" minOccurs="0" />
+													<xs:element name="intitule" type="xs:string" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="idcv" type="xs:ID"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
