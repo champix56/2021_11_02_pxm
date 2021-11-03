@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:simpleType name="ST_permisCategorie">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="A"/>
+		<xs:enumeration value="B"/>
+		<xs:enumeration value="C"/>
+		<xs:enumeration value="AB"/>
+		<xs:enumeration value="BC"/>
+		<xs:enumeration value="ABC"/>
+	</xs:restriction>
+</xs:simpleType>
 <xs:complexType name="CT_ident">
 	<xs:sequence>
 		<xs:element name="nom" type="xs:string"/>
@@ -16,7 +26,7 @@
 		<xs:element name="permis">
 			<xs:complexType>
 				<xs:simpleContent>
-					<xs:extension base="xs:string">
+					<xs:extension base="ST_permisCategorie">
 						<xs:attribute name="ownVehicule" type="xs:boolean"/>
 					</xs:extension>
 				</xs:simpleContent>
