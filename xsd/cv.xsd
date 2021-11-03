@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:complexType name="CT_ident">
+	<xs:sequence>
+		<xs:element name="nom" type="xs:string"/>
+		<xs:element name="pnom" type="xs:string" maxOccurs="3"/>
+		<xs:element name="datenaiss" >
+			<xs:simpleType>
+				<xs:restriction base="xs:date">
+					<xs:minExclusive value="1939-12-31"/>
+					<!--<xs:minInclusive value="1940-01-01"/>-->
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+	</xs:sequence>
+</xs:complexType>	
+<xs:element name="ident" type="CT_ident"></xs:element>
 	<xs:simpleType name="ST_anneeBornee1930">
 		<xs:annotation>
 			<xs:documentation>type simple reutilisable pour la gestion de date 1930->+infini</xs:documentation>
@@ -20,6 +35,7 @@
 	</xs:group>
 	<xs:element name="deb" type="ST_anneeBornee1930"/>
 	<xs:element name="fin" type="ST_anneeBornee1930"/>
+	<xs:element name="intitule" type="xs:string"/>
 	<xs:element name="cvs">
 		<xs:annotation>
 			<xs:documentation>Noeud principal pour les cvs</xs:documentation>
@@ -42,19 +58,46 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="ident"/>
+							<xs:element ref="ident"/>
 							<xs:element name="pretentionSalariale" type="xs:int" minOccurs="0"/>
 							<xs:element name="formations">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
-										<xs:element name="centre">
-											<xs:simpleType>
-												<xs:restriction base="xs:string">
-													<xs:minLength value="3"/>
-													<xs:maxLength value="48"/>
-												</xs:restriction>
-											</xs:simpleType>
+										<xs:element name="formation" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
+													<xs:element name="centre">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:minLength value="3"/>
+																<xs:maxLength value="48"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="diplomes">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="diplome" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element ref="intitule"/>
+																		</xs:sequence>
+																		<xs:attribute name="obtenu" type="xs:boolean"/>
+																		<xs:attribute name="noteS20" use="optional" >
+																			<xs:simpleType>
+																				<xs:restriction base="xs:decimal">
+																					<xs:maxInclusive value="20"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
@@ -70,7 +113,7 @@
 											<xs:complexType>
 												<xs:sequence>
 													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
-													<xs:element name="intitule" type="xs:string"/>
+													<xs:element ref="intitule"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
