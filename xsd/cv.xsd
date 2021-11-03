@@ -9,6 +9,15 @@
 			<xs:minInclusive value="1930"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:group name="G_S_annee_deb_et_finFacultatif">
+		<xs:annotation>
+			<xs:documentation>group sequence annee deb et fin?</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="deb"/>
+			<xs:element ref="fin" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
 	<xs:element name="deb" type="ST_anneeBornee1930"/>
 	<xs:element name="fin" type="ST_anneeBornee1930"/>
 	<xs:element name="cvs">
@@ -38,6 +47,7 @@
 							<xs:element name="formations">
 								<xs:complexType>
 									<xs:sequence>
+										<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -51,8 +61,7 @@
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element ref="deb"/>
-													<xs:element ref="fin" minOccurs="0"/>
+													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
 													<xs:element name="intitule" type="xs:string"/>
 												</xs:sequence>
 											</xs:complexType>
@@ -66,5 +75,5 @@
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
-		</xs:element>
+	</xs:element>
 </xs:schema>
