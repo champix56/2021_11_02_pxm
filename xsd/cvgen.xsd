@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:simpleType name="ST_permisCategorie">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="AB"/>
+			<xs:enumeration value="BC"/>
+			<xs:enumeration value="ABC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ST_mail">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+@([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+.[a-z]{2,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ST_tel">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0|\+33( |.|-))[1-7]((.| |-)\d{2}){4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ST_anneeBornee1930">
+		<xs:annotation>
+			<xs:documentation>type simple reutilisable pour la gestion de date 1930->+infini</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear">
+			<xs:minInclusive value="1930"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ST_langName">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EN"/>
+			<xs:enumeration value="FR"/>
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="AL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:group name="G_S_annee_deb_et_finFacultatif">
+		<xs:annotation>
+			<xs:documentation>group sequence annee deb et fin?</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="deb"/>
+			<xs:element ref="fin" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="ST_centre">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="48"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ST_noteS20">
+		<xs:restriction base="xs:decimal">
+			<xs:maxInclusive value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="centre" type="ST_centre"/>
+	<xs:element name="cv" type="T_cv"/>
+	<xs:element name="cvSelectiones" type="T_cvSelectiones"/>
+	<xs:element name="cvs" type="T_cvs"/>
+	<xs:element name="datenaiss" type="xs:date"/>
+	<xs:element name="deb" type="ST_anneeBornee1930"/>
+	<xs:element name="diplome" type="T_diplome"/>
+	<xs:element name="diplomes" type="T_diplomes"/>
+	<xs:element name="experience" type="T_experience"/>
+	<xs:element name="experiences" type="T_experiences"/>
+	<xs:element name="fin" type="ST_anneeBornee1930"/>
+	<xs:element name="formation" type="T_formation"/>
+	<xs:element name="formations" type="T_formations"/>
+	<xs:element name="ident" type="T_ident"/>
+	<xs:element name="intitule" type="xs:string"/>
+	<xs:element name="langue" type="T_langue"/>
+	<xs:element name="langues" type="T_langues"/>
+	<xs:element name="mail" type="ST_mail"/>
+	<xs:element name="meilleurCV" type="T_meilleurCV"/>
+	<xs:element name="nom" type="xs:string"/>
+	<xs:element name="permis" type="T_permis"/>
+	<xs:element name="pnom" type="xs:string"/>
+	<xs:element name="pretentionSalariale" type="xs:short"/>
+	<xs:element name="tel" type="ST_tel"/>
+	<xs:attribute name="idcv" type="xs:string"/>
+	<xs:attribute name="idcvs" type="xs:string"/>
+	<xs:attribute name="langName" type="ST_langName"/>
+	<xs:attribute name="matern" type="xs:boolean"/>
+	<xs:attribute name="noteS20" type="ST_noteS20"/>
+	<xs:attribute name="obtenu" type="xs:boolean"/>
+	<xs:attribute name="ownVehicule" type="xs:boolean"/>
+	<xs:complexType name="T_cv">
+		<xs:sequence>
+			<xs:element ref="ident"/>
+			<xs:element ref="pretentionSalariale" minOccurs="0"/>
+			<xs:element ref="formations"/>
+			<xs:element ref="experiences"/>
+		</xs:sequence>
+		<xs:attribute ref="idcv" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="T_cvSelectiones">
+		<xs:attribute ref="idcvs" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="T_cvs">
+		<xs:sequence>
+			<xs:element ref="meilleurCV"/>
+			<xs:element ref="cvSelectiones"/>
+			<xs:element ref="cv" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_diplome">
+		<xs:sequence>
+			<xs:element ref="intitule"/>
+		</xs:sequence>
+		<xs:attribute ref="obtenu"/>
+		<xs:attribute ref="noteS20"/>
+	</xs:complexType>
+	<xs:complexType name="T_diplomes">
+		<xs:sequence>
+			<xs:element ref="diplome" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_experience">
+		<xs:sequence>
+			<xs:element ref="deb"/>
+			<xs:element ref="fin" minOccurs="0"/>
+			<xs:element ref="intitule"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_experiences">
+		<xs:sequence>
+			<xs:element ref="experience" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_formation">
+		<xs:sequence>
+			<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
+			<xs:element ref="centre"/>
+			<xs:element ref="diplomes"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_formations">
+		<xs:sequence>
+			<xs:element ref="formation" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_ident">
+		<xs:sequence>
+			<xs:element ref="nom"/>
+			<xs:element ref="pnom" maxOccurs="3"/>
+			<xs:element ref="datenaiss"/>
+			<xs:element ref="permis"/>
+			<xs:element ref="langues"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="tel"/>
+					<xs:element ref="mail" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element ref="mail"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_langue">
+		<xs:attribute ref="matern" use="required"/>
+		<xs:attribute ref="langName" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="T_langues">
+		<xs:sequence>
+			<xs:element ref="langue" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_meilleurCV">
+		<xs:attribute ref="idcv" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="T_permis">
+		<xs:simpleContent>
+			<xs:extension base="ST_permisCategorie">
+				<xs:attribute ref="ownVehicule" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
