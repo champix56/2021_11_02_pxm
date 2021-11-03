@@ -9,6 +9,8 @@
 			<xs:minInclusive value="1930"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:element name="deb" type="ST_anneeBornee1930"/>
+	<xs:element name="fin" type="ST_anneeBornee1930"/>
 	<xs:element name="cvs">
 		<xs:annotation>
 			<xs:documentation>Noeud principal pour les cvs</xs:documentation>
@@ -33,7 +35,12 @@
 						<xs:sequence>
 							<xs:element name="ident"/>
 							<xs:element name="pretentionSalariale" type="xs:int" minOccurs="0"/>
-							<xs:element name="formations"/>
+							<xs:element name="formations">
+								<xs:complexType>
+									<xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 							<xs:element name="experiences">
 								<xs:complexType>
 									<xs:sequence>
@@ -44,8 +51,8 @@
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="deb" type="ST_anneeBornee1930"/>
-													<xs:element name="fin" type="ST_anneeBornee1930" minOccurs="0"/>
+													<xs:element ref="deb"/>
+													<xs:element ref="fin" minOccurs="0"/>
 													<xs:element name="intitule" type="xs:string"/>
 												</xs:sequence>
 											</xs:complexType>
@@ -59,5 +66,5 @@
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
-	</xs:element>
+		</xs:element>
 </xs:schema>
