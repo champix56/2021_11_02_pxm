@@ -44,14 +44,8 @@
 											</xs:annotation>
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="deb">
-														<!--
-
-
-
--->
-													</xs:element>
-													<xs:element name="fin" type="xs:gYear" minOccurs="0"/>
+													<xs:element name="deb" type="ST_anneeBornee1930"/>
+													<xs:element name="fin" type="ST_anneeBornee1930" minOccurs="0"/>
 													<xs:element name="intitule" type="xs:string"/>
 												</xs:sequence>
 											</xs:complexType>
