@@ -22,7 +22,8 @@ cv{
 diplome{
 	margin-left:4cm;
 }
-formations intitule{color:green;}
+/*ghjokppjohi*/
+formations diplome>intitule{color:green;}
 formations:before, experiences:before{
 	display:block;
 	text-decoration:underline;
