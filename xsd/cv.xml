@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE cvs [
+	<!ENTITY euro "&#x20ac;">
+]>
 <cvs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cv.xsd">
-	<!--<meilleurCV idcv="_234"/>
-	<cvSelectiones idcvs="_234 _236"/>-->
+	<meilleurCV idcv="_234"/>
+	<cvSelectiones idcvs="_234 _236"/>
 	<cv idcv="_234">
 		<ident>
 			<nom>DESORBAIX</nom>
 			<pnom>Alexandre</pnom>
 			<pnom>Dominique</pnom>
-			<pnom>joël</pnom>
+			<pnom>jo&euro;l</pnom>
 			<datenaiss>1984-08-03</datenaiss>
 			<permis ownVehicule="false">A</permis>
 			<langues>
@@ -24,7 +27,7 @@
 				<fin>2008</fin>
 				<centre>Fac de versailles</centre>
 				<diplomes>
-					<diplome obtenu="true" noteS20="25">
+					<diplome obtenu="true" noteS20="20">
 						<intitule>DUT GEII</intitule>
 					</diplome>
 					<diplome obtenu="false">

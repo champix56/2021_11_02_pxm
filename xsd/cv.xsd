@@ -1,188 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:simpleType name="ST_permisCategorie">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="A"/>
-			<xs:enumeration value="B"/>
-			<xs:enumeration value="C"/>
-			<xs:enumeration value="AB"/>
-			<xs:enumeration value="BC"/>
-			<xs:enumeration value="ABC"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:complexType name="CT_ident">
-		<xs:sequence>
-			<xs:element name="nom" type="xs:string"/>
-			<xs:element name="pnom" type="xs:string" maxOccurs="3"/>
-			<xs:element name="datenaiss">
-				<xs:simpleType>
-					<xs:restriction base="xs:date">
-						<xs:minExclusive value="1939-12-31"/>
-						<!--<xs:minInclusive value="1940-01-01"/>-->
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="permis">
-				<xs:complexType>
-					<xs:simpleContent>
-						<xs:extension base="ST_permisCategorie">
-							<xs:attribute name="ownVehicule" type="xs:boolean"/>
-						</xs:extension>
-					</xs:simpleContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="langues">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="langue" maxOccurs="unbounded">
-							<xs:complexType>
-								<xs:attribute name="matern" type="xs:boolean"/>
-								<xs:attribute name="langName">
-									<xs:simpleType>
-										<xs:restriction base="xs:string">
-											<xs:enumeration value="EN"/>
-											<xs:enumeration value="FR"/>
-											<xs:enumeration value="ES"/>
-											<xs:enumeration value="AL"/>
-										</xs:restriction>
-									</xs:simpleType>
-								</xs:attribute>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:sequence maxOccurs="unbounded">
-				<xs:choice>
-					<xs:element name="tel">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:pattern value="(0|\+33( |.|-))[1-7]((.| |-)\d{2}){4}"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-					<xs:element name="mail">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:pattern value="([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+@([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+.[a-z]{2,10}"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:choice>
-			</xs:sequence>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="ident" type="CT_ident"/>
-	<xs:simpleType name="ST_anneeBornee1930">
-		<xs:annotation>
-			<xs:documentation>type simple reutilisable pour la gestion de date 1930->+infini</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:gYear">
-			<xs:minInclusive value="1930"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:group name="G_S_annee_deb_et_finFacultatif">
-		<xs:annotation>
-			<xs:documentation>group sequence annee deb et fin?</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element ref="deb"/>
-			<xs:element ref="fin" minOccurs="0"/>
-		</xs:sequence>
-	</xs:group>
-	<xs:element name="deb" type="ST_anneeBornee1930"/>
-	<xs:element name="fin" type="ST_anneeBornee1930"/>
-	<xs:element name="intitule" type="xs:string"/>
-	<xs:element name="cvs">
-		<xs:annotation>
-			<xs:documentation>Noeud principal pour les cvs</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="meilleurCV">
-					<xs:complexType>
-						<xs:attribute name="idcv" type="xs:IDREF"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="cvSelectiones">
-					<xs:complexType>
-						<xs:attribute name="idcvs" type="xs:IDREFS"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="cv" maxOccurs="unbounded">
-					<xs:annotation>
-						<xs:documentation>element qualifiant un CV</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="ident"/>
-							<xs:element name="pretentionSalariale" type="xs:int" minOccurs="0"/>
-							<xs:element name="formations">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="formation" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
-													<xs:element name="centre">
-														<xs:simpleType>
-															<xs:restriction base="xs:string">
-																<xs:minLength value="3"/>
-																<xs:maxLength value="48"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-													<xs:element name="diplomes">
-														<xs:complexType>
-															<xs:sequence>
-																<xs:element name="diplome" maxOccurs="unbounded">
-																	<xs:complexType>
-																		<xs:sequence>
-																			<xs:element ref="intitule"/>
-																		</xs:sequence>
-																		<xs:attribute name="obtenu" type="xs:boolean"/>
-																		<xs:attribute name="noteS20" use="optional">
-																			<xs:simpleType>
-																				<xs:restriction base="xs:decimal">
-																					<xs:maxInclusive value="20"/>
-																				</xs:restriction>
-																			</xs:simpleType>
-																		</xs:attribute>
-																	</xs:complexType>
-																</xs:element>
-															</xs:sequence>
-														</xs:complexType>
-													</xs:element>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="experiences">
-								<xs:complexType>
-									<xs:sequence>
-										<!--limitation du nb d'occurence a 10 max-->
-										<xs:element name="experience" maxOccurs="10">
-											<xs:annotation>
-												<xs:documentation>Element experience limite 10 occurence</xs:documentation>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>
-													<xs:element ref="intitule"/>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute name="idcv" type="xs:ID"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-</xs:schema>
+<?xml version="1.0" encoding="UTF-8"?><!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by  () --><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">	<xs:simpleType name="ST_permisCategorie">		<xs:restriction base="xs:string">			<xs:enumeration value="A"/>			<xs:enumeration value="B"/>			<xs:enumeration value="C"/>			<xs:enumeration value="AB"/>			<xs:enumeration value="BC"/>			<xs:enumeration value="ABC"/>		</xs:restriction>	</xs:simpleType>	<xs:complexType name="CT_ident">		<xs:sequence>			<xs:element name="nom" type="xs:string"/>			<xs:element name="pnom" type="xs:string" maxOccurs="3"/>			<xs:element name="datenaiss">				<xs:simpleType>					<xs:restriction base="xs:date">						<xs:minExclusive value="1939-12-31"/>						<!--<xs:minInclusive value="1940-01-01"/>-->					</xs:restriction>				</xs:simpleType>			</xs:element>			<xs:element name="permis">				<xs:complexType>					<xs:simpleContent>						<xs:extension base="ST_permisCategorie">							<xs:attribute name="ownVehicule" type="xs:boolean"/>						</xs:extension>					</xs:simpleContent>				</xs:complexType>			</xs:element>			<xs:element name="langues">				<xs:complexType>					<xs:sequence>						<xs:element name="langue" maxOccurs="unbounded">							<xs:complexType>								<xs:attribute name="matern" type="xs:boolean"/>								<xs:attribute name="langName">									<xs:simpleType>										<xs:restriction base="xs:string">											<xs:enumeration value="EN"/>											<xs:enumeration value="FR"/>											<xs:enumeration value="ES"/>											<xs:enumeration value="AL"/>										</xs:restriction>									</xs:simpleType>								</xs:attribute>							</xs:complexType>						</xs:element>					</xs:sequence>				</xs:complexType>			</xs:element>			<xs:sequence maxOccurs="unbounded">				<xs:choice>					<xs:element name="tel">						<xs:simpleType>							<xs:restriction base="xs:string">								<xs:pattern value="(0|\+33( |.|-))[1-7]((.| |-)\d{2}){4}"/>							</xs:restriction>						</xs:simpleType>					</xs:element>					<xs:element name="mail">						<xs:simpleType>							<xs:restriction base="xs:string">								<xs:pattern value="([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+@([_a-z0-9]([a-z0-9._-][a-z0-9_])*)+.[a-z]{2,10}"/>							</xs:restriction>						</xs:simpleType>					</xs:element>				</xs:choice>			</xs:sequence>		</xs:sequence>	</xs:complexType>	<xs:element name="ident" type="CT_ident"/>	<xs:simpleType name="ST_anneeBornee1930">		<xs:annotation>			<xs:documentation>type simple reutilisable pour la gestion de date 1930->+infini</xs:documentation>		</xs:annotation>		<xs:restriction base="xs:gYear">			<xs:minInclusive value="1930"/>		</xs:restriction>	</xs:simpleType>	<xs:group name="G_S_annee_deb_et_finFacultatif">		<xs:annotation>			<xs:documentation>group sequence annee deb et fin?</xs:documentation>		</xs:annotation>		<xs:sequence>			<xs:element ref="deb"/>			<xs:element ref="fin" minOccurs="0"/>		</xs:sequence>	</xs:group>	<xs:element name="deb" type="ST_anneeBornee1930"/>	<xs:element name="fin" type="ST_anneeBornee1930"/>	<xs:element name="intitule" type="xs:string"/>	<xs:element name="cvs">		<xs:annotation>			<xs:documentation>Noeud principal pour les cvs</xs:documentation>		</xs:annotation>		<xs:complexType>			<xs:sequence>				<xs:element name="meilleurCV">					<xs:complexType>						<xs:attribute name="idcv" type="xs:IDREF"/>					</xs:complexType>				</xs:element>				<xs:element name="cvSelectiones">					<xs:complexType>						<xs:attribute name="idcvs" type="xs:IDREFS"/>					</xs:complexType>				</xs:element>				<xs:element name="cv" maxOccurs="unbounded">					<xs:annotation>						<xs:documentation>element qualifiant un CV</xs:documentation>					</xs:annotation>					<xs:complexType>						<xs:sequence>							<xs:element ref="ident"/>							<xs:element name="pretentionSalariale" type="xs:int" minOccurs="0"/>							<xs:element name="formations">								<xs:complexType>									<xs:sequence>										<xs:element name="formation" maxOccurs="unbounded">											<xs:complexType>												<xs:sequence>													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>													<xs:element name="centre">														<xs:simpleType>															<xs:restriction base="xs:string">																<xs:minLength value="3"/>																<xs:maxLength value="48"/>															</xs:restriction>														</xs:simpleType>													</xs:element>													<xs:element name="diplomes">														<xs:complexType>															<xs:sequence>																<xs:element name="diplome" maxOccurs="unbounded">																	<xs:complexType>																		<xs:sequence>																			<xs:element ref="intitule"/>																		</xs:sequence>																		<xs:attribute name="obtenu" type="xs:boolean"/>																		<xs:attribute name="noteS20" use="optional">																			<xs:simpleType>																				<xs:restriction base="xs:decimal">																					<xs:maxInclusive value="20"/>																				</xs:restriction>																			</xs:simpleType>																		</xs:attribute>																	</xs:complexType>																</xs:element>															</xs:sequence>														</xs:complexType>													</xs:element>												</xs:sequence>											</xs:complexType>										</xs:element>									</xs:sequence>								</xs:complexType>							</xs:element>							<xs:element name="experiences">								<xs:complexType>									<xs:sequence>										<!--limitation du nb d'occurence a 10 max-->										<xs:element name="experience" maxOccurs="10">											<xs:annotation>												<xs:documentation>Element experience limite 10 occurence</xs:documentation>											</xs:annotation>											<xs:complexType>												<xs:sequence>													<xs:group ref="G_S_annee_deb_et_finFacultatif"/>													<xs:element ref="intitule"/>												</xs:sequence>											</xs:complexType>										</xs:element>									</xs:sequence>								</xs:complexType>							</xs:element>						</xs:sequence>						<xs:attribute name="idcv" type="xs:ID"/>					</xs:complexType>				</xs:element>			</xs:sequence>		</xs:complexType>	</xs:element></xs:schema>
