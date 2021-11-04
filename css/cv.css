@@ -1,0 +1,40 @@
+cvs{
+	color:blue;
+}
+cv, ident, formations, experiences, experience, formation, nom, datenaiss, tel, mail, permis, diplome{
+	display:block;
+}
+ident{
+	width:8cm;
+	margin-bottom:3cm;
+}
+pretentionSalariale{
+	display:none;
+}
+formations, experiences{
+	margin-bottom:3cm;
+}
+cv{
+	margin-bottom:1cm;
+	padding-left:1cm;
+	padding-right:1cm;
+}
+diplome{
+	margin-left:4cm;
+}
+formations intitule{color:green;}
+formations:before, experiences:before{
+	display:block;
+	text-decoration:underline;
+	font-weight:900;
+	font-size:32pt;
+	margin-bottom:0.5cm;
+}
+formations:before{	content:'Formations:'; }
+experiences:before{	content:'Experiences:'; }
+
+formations:hover, experiences:hover{
+	background-color:skyblue;
+	color:white;
+	
+}
