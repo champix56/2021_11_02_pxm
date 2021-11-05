@@ -82,10 +82,23 @@
 			<xsl:value-of select="/factures/@villeets"/>
 		</div>
 	</xsl:template>
+	<xsl:template match="clients/client">
+			<xsl:value-of select="destinataire"/>
+			<br/>
+			<xsl:value-of select="adr1"/>
+			<br/>
+			<xsl:value-of select="cp"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="ville"/>
+	</xsl:template>
 	<xsl:template match="facture">
 		<div class="c_facture" id="facture-{@numfacture}">
 			<xsl:apply-templates select="/factures/@rsets"/>
-			<div class="destinataire">destinataire</div>
+			<div class="destinataire">
+			<xsl:variable name="idc" select="@idclient"/>
+				<xsl:variable name="client" select="document('../clients.xml')/clients/client[@id=$idc]"/>
+				<xsl:apply-templates select="$client"/>
+			</div>
 			<div class="numero">
 							Facture N°<xsl:value-of select="@numfacture"/>
 				<br/>en date du :<xsl:value-of select="@datefacture"/>
@@ -111,21 +124,29 @@
 	</xsl:template>
 	<xsl:decimal-format name="euro" decimal-separator="," grouping-separator=" "/>
 	<xsl:template name="totaux">
+		<!--arrondi au centimes pour calculs-->
 		<xsl:variable name="totalht" select="format-number(sum(.//stotligne),'0.00')"/>
 		<xsl:variable name="totaltva" select="format-number($totalht * 0.2,'0.00')"/>
 		<tr>
 			<th colspan="4" class="totalTitre">Total HT</th>
+			<!--arrondi au centime pour affichage-->
 			<th>
 				<xsl:value-of select="format-number($totalht,'# ##0,00&euro;','euro')"/>
 			</th>
 		</tr>
 		<tr>
 			<th colspan="4" class="totalTitre">Total TVA</th>
-			<th><xsl:value-of select="format-number($totaltva,'# ##0,00&euro;','euro')"/></th>
+			<!--arrondi au centime pour affichage-->
+			<th>
+				<xsl:value-of select="format-number($totaltva,'# ##0,00&euro;','euro')"/>
+			</th>
 		</tr>
 		<tr>
 			<th colspan="4" class="totalTitre">Total TTC</th>
-			<th><xsl:value-of select="format-number($totaltva + $totalht,'# ##0,00&euro;','euro')"/></th>
+			<!--arrondi au centime pour affichage-->
+			<th>
+				<xsl:value-of select="format-number($totaltva + $totalht,'# ##0,00&euro;','euro')"/>
+			</th>
 		</tr>
 	</xsl:template>
 	<xsl:template match="ligne">
