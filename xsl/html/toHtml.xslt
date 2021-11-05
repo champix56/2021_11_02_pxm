@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xsl:stylesheet [
 	<!ENTITY euro "&#x20ac;">
+	<!ENTITY nbsp "&#160;">
 ]>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
@@ -41,6 +42,9 @@
 						margin-left:10%;
 					}
 					table thead th{background-color:lightgrey;}
+					.totalTitre{
+						text-align:right;
+					}
 				</style>
 			</head>
 			<body>
@@ -67,9 +71,20 @@
 			C'est un devis
 		</div>
 	</xsl:template>
+	<xsl:template match="@rsets">
+		<div class="emeteur">
+			<xsl:value-of select="."/>
+			<br/>
+			<xsl:value-of select="/factures/@adr1ets"/>
+			<br/>
+			<xsl:value-of select="/factures/@cpets"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="/factures/@villeets"/>
+		</div>
+	</xsl:template>
 	<xsl:template match="facture">
 		<div class="c_facture" id="facture-{@numfacture}">
-			<div class="emeteur">emeteur</div>
+			<xsl:apply-templates select="/factures/@rsets"/>
 			<div class="destinataire">destinataire</div>
 			<div class="numero">
 							Facture N°<xsl:value-of select="@numfacture"/>
@@ -88,8 +103,30 @@
 				<tbody>
 					<xsl:apply-templates select=".//ligne"/>
 				</tbody>
+				<tfoot>
+					<xsl:call-template name="totaux"/>
+				</tfoot>
 			</table>
 		</div>
+	</xsl:template>
+	<xsl:decimal-format name="euro" decimal-separator="," grouping-separator=" "/>
+	<xsl:template name="totaux">
+		<xsl:variable name="totalht" select="format-number(sum(.//stotligne),'0.00')"/>
+		<xsl:variable name="totaltva" select="format-number($totalht * 0.2,'0.00')"/>
+		<tr>
+			<th colspan="4" class="totalTitre">Total HT</th>
+			<th>
+				<xsl:value-of select="format-number($totalht,'# ##0,00&euro;','euro')"/>
+			</th>
+		</tr>
+		<tr>
+			<th colspan="4" class="totalTitre">Total TVA</th>
+			<th><xsl:value-of select="format-number($totaltva,'# ##0,00&euro;','euro')"/></th>
+		</tr>
+		<tr>
+			<th colspan="4" class="totalTitre">Total TTC</th>
+			<th><xsl:value-of select="format-number($totaltva + $totalht,'# ##0,00&euro;','euro')"/></th>
+		</tr>
 	</xsl:template>
 	<xsl:template match="ligne">
 		<tr>
