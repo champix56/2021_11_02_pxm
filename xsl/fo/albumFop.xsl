@@ -19,6 +19,11 @@
 					<xsl:value-of select="/photos/titre"/>
 				</fo:block>
 			</fo:static-content>
+			<fo:static-content flow-name="xsl-region-after">
+				<fo:block font-size="7mm" color="skyblue" text-align="center">
+					<fo:page-number/>
+				</fo:block>
+			</fo:static-content>
 			<fo:flow flow-name="xsl-region-body">
 				<fo:block>
 					<fo:table>
